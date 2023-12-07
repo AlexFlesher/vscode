@@ -6,6 +6,7 @@ import math
 # Variables
 
 balance = 100
+guessed_numbers = []
 
 # Functions
 
@@ -43,7 +44,7 @@ def diceRollGame():
             while True:
                 while True:
                     try:
-                        betAmount = int(input("\nHow much do you want to bet? $"))
+                        betAmount = float(input("\nHow much do you want to bet? $"))
                         break
                     except ValueError:
                         print("Please type a valid bet amount.")
@@ -109,7 +110,7 @@ def coinFlipGame():
             while True:
                 while True:
                     try:
-                        betAmount = int(input("How much do you want to bet? $"))
+                        betAmount = float(input("How much do you want to bet? $"))
                         break
                     except ValueError:
                         print("Please type a valid bet amount.")
@@ -154,7 +155,8 @@ def coinFlipGame():
             print("Invalid option. Please enter a valid number.\n")
     
 def guessGainGame():
-    global balance 
+    global balance
+    global guessed_numbers 
 
     while True:
         print("\nWhat would you like to do?")
@@ -177,7 +179,7 @@ def guessGainGame():
             while True:
                 while True:
                     try:
-                        betAmount = int(input("\nHow much do you want to bet? $"))
+                        betAmount = float(input("\nHow much do you want to bet? $"))
                         break
                     except ValueError:
                         print("Please type a valid bet amount.")
@@ -197,6 +199,10 @@ def guessGainGame():
                         try:
                             userGuess = int(input("\nWhat number would you like to guess? "))
                             if userGuess >= 1 and userGuess <= 10:
+                                if userGuess in guessed_numbers:
+                                    print("You have already guessed that number.")
+                                    continue
+                                guessed_numbers.append(userGuess)
                                 break
                             else:
                                 print("You must guess a number between 1 and 10.")
@@ -204,7 +210,7 @@ def guessGainGame():
                         except ValueError:
                             print("Please enter a valid number.")
                         
-                    roundEarnings = math.ceil(betAmount / 10)
+                    roundEarnings = round((betAmount / 10), 1)
                         
                     if userGuess == num:
                         print(f"\nOh no! You guessed the selected number. You have lost ${betAmount}.")

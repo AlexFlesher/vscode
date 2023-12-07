@@ -204,7 +204,7 @@ def guessGainGame():
                         except ValueError:
                             print("Please enter a valid number.")
                         
-                    roundEarnings = math.floor(betAmount / 10)
+                    roundEarnings = math.ceil(betAmount / 10)
                         
                     if userGuess == num:
                         print(f"\nOh no! You guessed the selected number. You have lost ${betAmount}.")
